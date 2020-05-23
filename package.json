@@ -1,0 +1,15 @@
+{
+  "name": "js-interview",
+  "version": "1.0.0",
+  "description": "Open source repository for JavaScripters to familiarise themselves with interview topics",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "Sonjeet Paul",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
