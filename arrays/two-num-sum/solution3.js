@@ -3,6 +3,7 @@
  *
  * Time complexity: O(nlog(n))
  * Space complexity: O(1)
+ * n represents the length of the array
  */
 
 function twoNumSum(arr, targetSum) {

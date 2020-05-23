@@ -1,6 +1,4 @@
-# Two Number Sum
-
-![Difficulty: Easy](https://img.shields.io/badge/Difficulty-Easy-brightgreen)
+# Two Number Sum ![Difficulty: Easy](https://img.shields.io/badge/Difficulty-Easy-brightgreen)
 
 ## Task
 
@@ -35,5 +33,5 @@ targetSum = 19;
 ```javascript
 // the numbers in the array may be in any order
 // empty array would've been returned if a matching pair didn't exist
-[15, 4];
+[15, 4]
 ```
