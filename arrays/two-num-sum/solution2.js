@@ -15,7 +15,6 @@ function twoNumSum(arr, targetSum) {
     }
     numsTable[num] = true;
   }
-
   return [];
 }
 

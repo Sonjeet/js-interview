@@ -1,137 +1,97 @@
-/**
- *
- * @author Sonjeet Paul <https://github.com/sonjeet>
- *
- * BST implemented with methods that have an iterative solutions.
- * Documentation for each function can be found in the [README](https://github.com/sonjeet/js-interview/tree/master/datastructures/binary-search-tree) of this section
- */
-
+// iterative
 class BST {
-  constructor(val) {
-    this.value = val;
+  constructor(value) {
+    this.value = value;
     this.left = null;
     this.right = null;
   }
 
-  /**
-   *
-   * Time complexity:
-   *  Average case: O(log(n))
-   *  Worst case: O(n)
-   *
-   * Space complexity:
-   *  Average case: O(1)
-   *  Worst case: O(1)
-   *
-   * Average case occurs when BST is balanced
-   * Worst case occurs when BST is heavily right sided i.e. if every child node is greater than its parent node
-   */
-  insert(val) {
-    let currentNode = this;
+  insert(value) {
+    let current = this;
     while (true) {
-      if (val < currentNode.value) {
-        if (currentNode.left === null) {
-          currentNode.left = new BST(val);
+      if (value < current.value) {
+        if (current.left === null) {
+          current.left = new BST(value);
           break;
         } else {
-          currentNode = currentNode.left;
+          current = current.left;
         }
       } else {
-        if (currentNode.right === null) {
-          currentNode.right = new BST(val);
+        if (current.right === null) {
+          current.right = new BST(value);
           break;
         } else {
-          currentNode = currentNode.right;
+          current = current.right;
         }
       }
     }
+
+    return this;
   }
 
-  /**
-   *
-   * Time complexity:
-   *  Average case: O(log(n))
-   *  Worst case: O(n)
-   *
-   * Space complexity:
-   *  Average case: O(1)
-   *  Worst case: O(1)
-   *
-   * Average case occurs when BST is balanced
-   * Worst case occurs when BST is heavily right sided i.e. if every child node is greater than its parent node
-   */
-  find(val) {
-    let currentNode = this;
-    while (currentNode !== null) {
-      if (val < currentNode.value) {
-        currentNode = currentNode.left;
-      } else if (val > currentNode.value) {
-        currentNode = currentNode.right;
+  contains(value) {
+    let current = this;
+    while (current !== null) {
+      if (value < current.value) {
+        current = current.left;
+      } else if (value > current.value) {
+        current = current.right;
       } else {
         return true;
       }
     }
+
     return false;
   }
 
-  /**
-   *
-   * Time complexity:
-   *  Average case: O(log(n))
-   *  Worst case: O(n)
-   *
-   * Space complexity:
-   *  Average case: O(1)
-   *  Worst case: O(1)
-   *
-   * Average case occurs when BST is balanced
-   * Worst case occurs when BST is heavily right sided i.e. if every child node is greater than its parent node
-   */
-  remove(val, parentNode = null) {
-    let currentNode = this;
-    while (currentNode !== null) {
-      if (val < currentNode.value) {
-        parent = currentNode;
-        currentNode = currentNode.left;
-      } else if (val > currentNode.value) {
-        parent = currentNode;
-        currentNode = currentNode.right;
+  remove(value, parent = null) {
+    let current = this;
+    while (current !== null) {
+      if (value < current.value) {
+        parent = current;
+        current = current.left;
+      } else if (value > current.value) {
+        parent = current;
+        current = current.right;
       } else {
-        if (currentNode.left !== null && currentNode.right !== null) {
-          currentNode = currentNode.right.getMinVal();
-          currentNode.right.remove(currentNode.value, currentNode);
-        } else if (parentNode === null) {
-          if (currentNode.left !== null) {
-            currentNode = currentNode.left;
-            currentNode.right = currentNode.left.right;
-            currentNode.left = currentNode.left.left;
-          } else if (currentNode.right !== null) {
-            currentNode = currentNode.right;
-            currentNode.left = currentNode.right.left;
-            currentNode.right = currentNode.right.right;
+        // it is within this block that the actual removal of a node occurs
+        if (current.left !== null && current.right !== null) {
+          current.value = current.right.getMinValue();
+          current.right.remove(current.value, current);
+        } else if (parent === null) {
+          if (current.left !== null) {
+            current.value = current.left.value;
+            current.right = current.left.right;
+            current.left = current.left.left;
+          } else if (current.right !== null) {
+            current.value = current.right.value;
+            current.left = current.right.left;
+            current.right = current.right.right;
+          } else {
+            // at this stage we are attempting to remove a root node
+            // where the root node has no children
+            // it may be interview dependent on how you should delete a single-node tree
           }
-        } else if (parentNode.left === currentNode) {
-          parentNode.left =
-            currentNode.left !== null ? currentNode.left : currentNode.right;
-        } else if (parentNode.right === currentNode) {
-          parentNode.right =
-            currentNode.left !== null ? currentNode.left : currentNode.right;
+        } else if (current === parent.left) {
+          parent.left = current.left !== null ? current.left : current.right;
+        } else if (current === parent.right) {
+          parent.right = current.left !== null ? current.left : current.right;
         }
+        break;
       }
     }
+
+    return this;
   }
 
-  /**
-   *
-   * @returns {BST} - this will be the node with the lowest value that exists in the BST
-   */
-  getMinVal() {
-    let currentNode = this;
-    while (currentNode.left !== null) {
-      currentNode = currentNode.left;
+  getMinValue() {
+    let current = this;
+    while (current.left !== null) {
+      current = current.left;
     }
-    return currentNode;
+    return current.value;
   }
 }
 
+// Do not edit the line below.
 exports.BST = BST;

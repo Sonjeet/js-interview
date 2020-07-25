@@ -10,6 +10,8 @@
   "author": "Sonjeet Paul",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^26.0.1"
+    "eslint": "^7.5.0",
+    "jest": "^26.0.1",
+    "prettier": "2.0.5"
   }
 }
